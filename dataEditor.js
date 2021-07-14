@@ -130,7 +130,7 @@ loadStrategyInputData(true)
     addArrayGuiFolder(gui, guiData.contextList, 'contexts');
     addArrayGuiFolder(gui, guiData.thingList, 'things');
     addArrayGuiFolder(gui, guiData.keys, 'keys');
-    addArrayGuiFolder(gui, guiData.pitches, 'pitch lists');
+    addArrayGuiFolder(gui, guiData.pitches, 'pitch lists', guiData.keys);
 
     let buttonObj = {
         'SAVE': function() {
