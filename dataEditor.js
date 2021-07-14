@@ -102,8 +102,6 @@ loadStrategyInputData(true)
     let bpmFold = gui.addFolder('bpm');
     bpmFold.add(guiData.bpm, 'min').min(40).max(160).step(1);
     bpmFold.add(guiData.bpm, 'max').min(160).max(420).step(1);
-    if(guiData.bpm.min > guiData.bpm.max)
-        guiData.bpm.max = guiData.bpm.min;
 
     addArrayGuiFolder(gui, guiData.genres, 'genres');
     addArrayGuiFolder(gui, guiData.systemList, 'systems');
