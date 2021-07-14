@@ -1,6 +1,9 @@
 body {
     font-size: 24px;
 }
+#strategy-wrap {
+    font-size: 28px;
+}
 #get-strategy {
     font-size: 24px;
     font-weight: bold;
@@ -8,5 +11,6 @@ body {
     width: 256px;
 }
 #editor-link {
+    font-size: 26px;
     font-weight: bold;
 }
