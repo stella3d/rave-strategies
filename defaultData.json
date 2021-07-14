@@ -1,5 +1,5 @@
 {
-    "bpm": [80, 200],
+    "bpm": { "min": 80, "max": 200 },
     "genres": [
         "techno",
         "house",

@@ -25,7 +25,7 @@ function merge(a, b) {
         if(bVal) 
             merged[k] = bVal;
     });
-    return to;
+    return merged;
 }
 
 function getStorageKeys(defaults) {
@@ -66,7 +66,7 @@ fetch('./defaultData.json')
 
     // GENERATE A TRACK TEMPO
     var bpmRange = data['bpm']
-    const bpm = randomInt(bpmRange[0], bpmRange[1]);
+    const bpm = randomInt(bpmRange.min, bpmRange.max);
 
     // WEIGHTED PROBABILITY FOR SONG LENGTH
     // 1:00 => 10%, 2:00 => 20%, 3:00 => 40%, 4:00 => 20%, 5:00 => 10%
