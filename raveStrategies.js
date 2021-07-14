@@ -32,8 +32,6 @@ fetch('./defaultData.json').then(resp => resp.json()).then(function(data) {
     const keyList = data['keys'];
     const pitchListIndex = randomInt(0, pitchList.length);
 
-    console.log("key list:", keyList);
-    console.log("pitch list index: " + pitchListIndex);
     const key = keyList[pitchListIndex];
     const pitches = pitchList[pitchListIndex];
 
@@ -68,7 +66,6 @@ fetch('./defaultData.json').then(resp => resp.json()).then(function(data) {
 
     const systemSelection = randomChoice(systemWeights);
     const sounds = randomSample(systemList[systemSelection], randomInt(1, 3));
-    console.log('sounds:', sounds);
 
     const sequencerList = data['sequencerList'];
     var sequencerPrepend = '';
@@ -109,7 +106,6 @@ fetch('./defaultData.json').then(resp => resp.json()).then(function(data) {
 
     const pitchesStr = 'pitches: ' + pitches;
 
-    console.log(raveStrategy, description, pitchesStr);
     // unlike original, we're not going to email but instead display in HTML
     document.getElementById('strategy').textContent = raveStrategy;
     document.getElementById('description').textContent = description;
