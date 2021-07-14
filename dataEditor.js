@@ -20,17 +20,22 @@ function addArrayGuiFolder(gui, array, name) {
         }
     }
 
-    folder['addElement'] = function() {};
-    let addElementButton = folder.add(folder, 'addElement');
+    folder['AddElement'] = function() {};
+    let addElementButton = folder.add(folder, 'AddElement');
 
-    folder['addElement'] = function() {
+    folder['AddElement'] = function() {
         const length = array.length;
-        array.push('');
         console.log(array);
-
+        let push = function(val) {
+            console.log('adding: ', val);
+            var newProp = '' + array.length;
+            array[newProp] = val;
+            array.length++;
+        }
+        push('');
         folder.remove(addElementButton);
         folder.add(array, '' + length);
-        addElementButton = folder.add(folder, 'addElement');
+        addElementButton = folder.add(folder, 'AddElement');
     }
 }
 
@@ -40,13 +45,14 @@ function arrayToObject(array) {
         obj[i] = array[i];
     }
     obj['isArrayRepresentation'] = true;
-    obj.length = array.length;
-    obj.push = function(val) {
+    obj['push'] = function(val) {
         console.log('adding: ', val);
         var newProp = '' + this.length;
-        obj[newProp] = val;
+        this[newProp] = val;
         this.length++;
     }
+    obj.length = array.length;
+    console.log(obj);
     return obj;
 }
 
@@ -66,47 +72,33 @@ function arrayMembersToObjects(obj) {
     return obj;
 }
 
-console.log("EDITOR JS INIT");
+loadStrategyInputData()
+.then((data) => {
+    let buttonObj = {};
+    let guiData = arrayMembersToObjects(data);
+    console.log("defaults loaded:", data, guiData);
+    // depends on dat.gui being loaded before this in the <head>
+    let gui = new dat.GUI();
+    //gui.remember(defaults);
 
-//document.onloadeddata = () => {
-    fetch('./defaultData.json').then(resp => resp.json())
-    .then((defaults) => {
-        let guiData = arrayMembersToObjects(defaults);
-        console.log("defaults loaded:", defaults, guiData);
-        // depends on dat.gui being loaded before this in the <head>
-        let gui = new dat.GUI();
+    var keys = Object.keys(guiData);
+    console.log("keys:", keys);
 
-        var testObj = { a: 5, b: "string", c: ["one", "two"] };
-        //gui.remember(defaults);
+    let bpmFold = gui.addFolder('bpm');
+    bpmFold.add(guiData.bpm, 'min').min(40).max(120).step(1);
+    bpmFold.add(guiData.bpm, 'max').min(120).max(420).step(1);
 
-        var keys = Object.keys(guiData);
-        console.log("keys:", keys);
+    addArrayGuiFolder(gui, guiData.genres, 'genres');
+    addArrayGuiFolder(gui, guiData.systemList, 'systems');
+    addArrayGuiFolder(gui, guiData.sequencerList, 'sequencers');
+    addArrayGuiFolder(gui, guiData.actionList, 'actions');
+    addArrayGuiFolder(gui, guiData.contextList, 'contexts');
+    addArrayGuiFolder(gui, guiData.thingList, 'things');
+    addArrayGuiFolder(gui, guiData.keys, 'keys');
+    addArrayGuiFolder(gui, guiData.pitches, 'pitch lists');
 
-        //gui.add(testObj, 'a');
-        //gui.add(testObj, 'b');
-
-        let bpmFold = gui.addFolder('bpm');
-        bpmFold.add(defaults.bpm, 'min');
-        bpmFold.add(defaults.bpm, 'max');
-
-        addArrayGuiFolder(gui, guiData.genres, 'genres');
-        addArrayGuiFolder(gui, guiData.systemList, 'systems');
-        addArrayGuiFolder(gui, guiData.sequencerList, 'sequencers');
-        addArrayGuiFolder(gui, guiData.actionList, 'actions');
-        addArrayGuiFolder(gui, guiData.contextList, 'contexts');
-        addArrayGuiFolder(gui, guiData.thingList, 'things');
-        addArrayGuiFolder(gui, guiData.keys, 'keys');
-        addArrayGuiFolder(gui, guiData.pitches, 'pitch lists');
-
-        /*
-        keys.forEach(k => {
-            console.log(k);
-            if(defaults[k]['isArrayRepresentation'])
-                addArrayGuiFolder(gui, guiData[k], k);
-            else
-                gui.add(guiData, k);
-        })
-        */
-    });
-
-//}
+    buttonObj['SAVE'] = function() {
+        saveUserData(guiData);
+    };
+    gui.add(buttonObj, 'SAVE')
+});
