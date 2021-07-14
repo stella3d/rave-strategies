@@ -21,4 +21,12 @@
     width: 440px; 
 }
 
+#instructions #save-feedback {
+    font-size: 48px;
+    font-weight: bold;
+    font-style: italic;
+    color: rgb(60, 60, 60);
+    text-align: center;
+}
+
 #index-link { font-weight: bold }

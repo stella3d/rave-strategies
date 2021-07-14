@@ -63,6 +63,13 @@ function objArrayToArray(obj) {
     return arr;
 }
 
+function displayTextTemporary(element, text, milliseconds) {
+    element.textContent = text;
+    setTimeout(() => {
+        element.textContent = '';
+    }, milliseconds);
+}
+
 function arrayMembersToObjects(obj) {
     Object.keys(obj).forEach(key => {
         var val = obj[key];
@@ -81,7 +88,8 @@ function arrayMembersToObjects(obj) {
 
 loadStrategyInputData(true)
 .then((data) => {
-    let buttonObj = {};
+    const saveFeedbackElement = document.getElementById('save-feedback');
+
     let guiData = arrayMembersToObjects(data);
     console.log("defaults loaded:", data, guiData);
     // depends on dat.gui being loaded before this in the <head>
@@ -106,21 +114,25 @@ loadStrategyInputData(true)
     addArrayGuiFolder(gui, guiData.keys, 'keys');
     addArrayGuiFolder(gui, guiData.pitches, 'pitch lists');
 
-    buttonObj['SAVE'] = function() {
-        let saveData = {};    
-        Object.keys(guiData).forEach(k => {
-            let val = guiData[k];
-            if(val['isArrayRepresentation']) {
-                for (let i = 0; i < val.length; i++) {
-                    const element = val[i];
-                    if(element['isArrayRepresentation'])
-                        val[i] = objArrayToArray(element);    
+    let buttonObj = {
+        'SAVE': function() {
+            let saveData = {};    
+            Object.keys(guiData).forEach(k => {
+                let val = guiData[k];
+                if(val['isArrayRepresentation']) {
+                    for (let i = 0; i < val.length; i++) {
+                        const element = val[i];
+                        if(element['isArrayRepresentation'])
+                            val[i] = objArrayToArray(element);    
+                    }
+                    val = objArrayToArray(val);
                 }
-                val = objArrayToArray(val);
-            }
-            saveData[k] = val;    
-        });
-        saveUserData(saveData);
-    };
+                saveData[k] = val;    
+            });
+            saveUserData(saveData);
+            displayTextTemporary(saveFeedbackElement, 'Settings saved.', 12000)
+        }
+    }
+
     gui.add(buttonObj, 'SAVE');
 });
