@@ -19,8 +19,6 @@ function randomSample(array, size) {
 // TODO - replace fetch of default data with function that gets user's saved values (if present)
 loadStrategyInputData(false)
 .then(data => {
-    const dataKeys = Object.keys(data);
-
     // GENERATE A TRACK TEMPO
     var bpmRange = data['bpm']
     const bpm = randomInt(bpmRange.min, bpmRange.max);
