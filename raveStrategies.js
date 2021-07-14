@@ -16,9 +16,54 @@ function randomSample(array, size) {
     return shuffled.slice(0, size);
 }
 
+// overwrite / add values from 'b' to 'a' without modifying originals
+function merge(a, b) {
+    let merged = {};
+    Object.keys(a).forEach(k => merged[k] = a[k]);
+    Object.keys(b).forEach(k => {
+        var bVal = b[k];
+        if(bVal) 
+            merged[k] = bVal;
+    });
+    return to;
+}
+
+function getStorageKeys(defaults) {
+    return Object.keys(defaults).map(k => "rs-" + k);
+}
+
+function saveUserData(data) {
+    Object.keys(data).map(k => ["rs-" + k, data[k]]).forEach(kvp => {
+        localStorage.setItem(kvp[0], kvp[1]);
+    });
+}
+
+function loadUserData(defaults) {
+    const storageKeys = getStorageKeys(defaults);
+    const savedValues = storageKeys.map(sk => {
+        var lsValue = localStorage.getItem(sk);
+        var ogKey = sk.slice(3); // remove 'rs-'
+        return lsValue ? [ogKey, JSON.parse(lsValue)] : null;
+    });
+
+    let data = {};
+    savedValues.forEach(v => {
+        if(v === null) return;
+        const key = v[0];
+        data[key] = v[1];
+    });
+
+    return merge(defaults, data);
+}
+
 // TODO - replace fetch of default data with function that gets user's saved values (if present)
-fetch('./defaultData.json').then(resp => resp.json()).then(function(data) {
-    console.log(data);
+fetch('./defaultData.json')
+.then(resp => resp.json())
+.then(loadUserData)
+.then(data => {
+    const dataKeys = Object.keys(data);
+    console.log(data, dataKeys);
+
     // GENERATE A TRACK TEMPO
     var bpmRange = data['bpm']
     const bpm = randomInt(bpmRange[0], bpmRange[1]);
