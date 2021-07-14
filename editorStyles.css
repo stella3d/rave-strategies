@@ -1,6 +1,6 @@
 .dg.main{
     font-size: 18px !important;
-    width: 360px;
+    width: 356px;
 }
 .closebutton { width: 360px; }
 
@@ -18,7 +18,7 @@
 
 #instructions {
     font-size: 24px;
-    width: 440px; 
+    width: 540px; 
 }
 
 #instructions #save-feedback {
