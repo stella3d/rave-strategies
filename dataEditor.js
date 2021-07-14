@@ -104,6 +104,7 @@ function guiToSaveData(guiData) {
     return saveData;
 }
 
+
 loadStrategyInputData(true)
 .then((data) => {
     const saveFeedbackElement = document.getElementById('save-feedback');
@@ -138,5 +139,10 @@ loadStrategyInputData(true)
             displayTextTemporary(saveFeedbackElement, 'Settings saved.', 12000)
         }
     }
-    gui.add(buttonObj, 'SAVE');
+    let saveButton = gui.add(buttonObj, 'SAVE');
+    
+    console.log(saveButton);
+    const buttonParent = saveButton.domElement.parentElement;
+    buttonParent.classList.add('big-gui');
+    buttonParent.parentElement.classList.add('big-gui-outer');
 });

@@ -12,13 +12,20 @@
 .dg li input { font-size: 16px; }
 .dg li.cr { font-size: 14px; }
 .dg li.cr.function { 
-    font-size: 18px; 
+    font-size: 16px; 
     font-weight: bold;
 }
 
 #instructions {
     font-size: 24px;
     width: 540px; 
+}
+
+.big-gui {
+    font-size: 28px;
+}
+.big-gui-outer {
+    height: 32px;
 }
 
 #instructions #save-feedback {
