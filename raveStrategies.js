@@ -99,9 +99,9 @@ loadStrategyInputData(false)
     const raveStrategy = 'Write a ' +
                             bpm + 'bpm ' + 
                             genre + ' track in ' + key + 
-                            ' using ' + sounds.join(' / ') + 
+                            ', using ' + sounds.join(' / ') + 
                             sequencerPrepend + sequencer + 
-                            ' with a duration of ~' + randomChoice(length) + '.'; 
+                            ', with a duration of ~' + randomChoice(length) + '.'; 
                             
     const description = 'It should ' + randomChoice(actionList) + 
                         ' like ' + randomChoice(thingList) + ' ' + 
