@@ -52,7 +52,6 @@ function arrayToObject(array) {
         this.length++;
     }
     obj.length = array.length;
-    console.log(obj);
     return obj;
 }
 
