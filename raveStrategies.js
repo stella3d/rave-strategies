@@ -110,4 +110,8 @@ function generateStrategy(data) {
     document.getElementById('pitches').textContent = pitchesStr;
 }
 
-loadStrategyInputData(false).then(generateStrategy);
+window.rsInput = null;
+loadStrategyInputData(false).then(inputData => {
+    window.rsInput = inputData; // save so html can ref it
+    generateStrategy(inputData);
+});

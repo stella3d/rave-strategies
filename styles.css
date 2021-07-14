@@ -1,7 +1,12 @@
 body {
     font-size: 24px;
 }
-
+#get-strategy {
+    font-size: 24px;
+    font-weight: bold;
+    height: 36px;
+    width: 256px;
+}
 #editor-link {
     font-weight: bold;
 }
