@@ -86,7 +86,7 @@ loadStrategyInputData(true)
     let guiData = arrayMembersToObjects(data);
     console.log("defaults loaded:", data, guiData);
     // depends on dat.gui being loaded before this in the <head>
-    let gui = new dat.GUI({ width: 400 });
+    let gui = new dat.GUI({ width: 460 });
     //gui.remember(defaults);
 
     var keys = Object.keys(guiData);
@@ -119,11 +119,9 @@ loadStrategyInputData(true)
                 }
                 val = objArrayToArray(val);
             }
-
             saveData[k] = val;    
         });
-
         saveUserData(saveData);
     };
-    gui.add(buttonObj, 'SAVE')
+    gui.add(buttonObj, 'SAVE');
 });

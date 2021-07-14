@@ -1,26 +1,24 @@
-body {
-    font-size: 20px;
-}
-
 .dg.main{
     font-size: 18px !important;
     width: 360px;
 }
-.closebutton {
-    width: 360px;
-}
+.closebutton { width: 360px; }
+
 .dg li.title {
     font-size: 18px !important;
     font-weight: bold;
 }
 
-.dg li.cr {
-    font-size: 14px;
-}
-.dg li input {
-    font-size: 16px;
+.dg li input { font-size: 16px; }
+.dg li.cr { font-size: 14px; }
+.dg li.cr.function { 
+    font-size: 18px; 
+    font-weight: bold;
 }
 
 #instructions {
-    width: 320px;
+    font-size: 20px;
+    width: 320px; 
 }
+
+#index-link { font-weight: bold }
