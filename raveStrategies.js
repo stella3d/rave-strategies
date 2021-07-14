@@ -16,9 +16,7 @@ function randomSample(array, size) {
     return shuffled.slice(0, size);
 }
 
-// TODO - replace fetch of default data with function that gets user's saved values (if present)
-loadStrategyInputData(false)
-.then(data => {
+function generateStrategy(data) {
     // GENERATE A TRACK TEMPO
     var bpmRange = data['bpm']
     const bpm = randomInt(bpmRange.min, bpmRange.max);
@@ -104,10 +102,12 @@ loadStrategyInputData(false)
                         ' like ' + randomChoice(thingList) + ' ' + 
                         randomChoice(contextList) + '.';
 
-    const pitchesStr = 'pitches: ' + pitches;
+    const pitchesStr = 'pitches in key of ' + key + ': ' + pitches;
 
     // unlike original, we're not going to email but instead display in HTML
     document.getElementById('strategy').textContent = raveStrategy;
     document.getElementById('description').textContent = description;
     document.getElementById('pitches').textContent = pitchesStr;
-});
+}
+
+loadStrategyInputData(false).then(generateStrategy);
