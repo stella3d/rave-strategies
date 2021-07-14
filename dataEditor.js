@@ -21,7 +21,7 @@ function addArrayGuiFolder(gui, array, name) {
     }
 
     folder['AddElement'] = function() {};
-    let addElementButton = folder.add(folder, 'AddElement');
+    let addElementButton = folder.add(folder, 'AddElement').name('+ Add Element');
 
     folder['AddElement'] = function() {
         const length = array.length;
@@ -35,7 +35,7 @@ function addArrayGuiFolder(gui, array, name) {
         push('');
         folder.remove(addElementButton);
         folder.add(array, '' + length);
-        addElementButton = folder.add(folder, 'AddElement');
+        addElementButton = folder.add(folder, 'AddElement').name('+ Add Element');
     }
 }
 

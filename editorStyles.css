@@ -1,3 +1,7 @@
 .dg {
     font-size: 16px !important;
 }
+
+.dg.main {
+    width: 512px !important;
+}
