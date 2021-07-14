@@ -11,6 +11,14 @@ body {
 }
 .dg li.title {
     font-size: 18px !important;
+    font-weight: bold;
+}
+
+.dg li.cr {
+    font-size: 14px;
+}
+.dg li input {
+    font-size: 16px;
 }
 
 #instructions {
