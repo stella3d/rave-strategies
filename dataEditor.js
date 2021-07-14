@@ -113,10 +113,6 @@ loadStrategyInputData(true)
     console.log("defaults loaded:", data, guiData);
     // depends on dat.gui being loaded before this in the <head>
     let gui = new dat.GUI({ width: 460 });
-    //gui.remember(defaults);
-
-    var keys = Object.keys(guiData);
-    console.log("keys:", keys);
 
     let bpmFold = gui.addFolder('bpm');
     bpmFold.add(guiData.bpm, 'min').min(40).max(160).step(1);
