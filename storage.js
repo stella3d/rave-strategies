@@ -17,17 +17,16 @@ function getStorageKeys(defaults) {
 function saveUserData(data) {
     Object.keys(data).map(k => ["rs-" + k, JSON.stringify(data[k])])
     .forEach(kvp => {
-        console.log('saving to local storage, key: ' + kvp[0], kvp[1]);
+        //console.log('saving to local storage, key: ' + kvp[0], kvp[1]);
         localStorage.setItem(kvp[0], kvp[1]);
     });
 }
 
 function loadUserData(defaults) {
-    //localStorage.clear();
     const storageKeys = getStorageKeys(defaults);
     const savedValues = storageKeys.map(sk => {
         var lsValue = localStorage.getItem(sk);
-        console.log('loaded from localStorage: ', lsValue);
+        //console.log('loaded from localStorage: ', lsValue);
         var ogKey = sk.slice(3); // remove 'rs-'
         return lsValue ? [ogKey, JSON.parse(lsValue)] : null;
     });
