@@ -17,7 +17,7 @@ function randomSample(array, size) {
 }
 
 // TODO - replace fetch of default data with function that gets user's saved values (if present)
-loadStrategyInputData()
+loadStrategyInputData(false)
 .then(data => {
     const dataKeys = Object.keys(data);
     console.log(data, dataKeys);

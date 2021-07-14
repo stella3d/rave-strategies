@@ -15,14 +15,16 @@ function getStorageKeys(defaults) {
 }
 
 function saveUserData(data) {
-    Object.keys(data).map(k => ["rs-" + k, JSON.stringify(data[k])])
+    Object.keys(data).map(k => {
+        return ["rs-" + k, JSON.stringify(data[k])]
+    })
     .forEach(kvp => {
-        //console.log('saving to local storage, key: ' + kvp[0], kvp[1]);
+        console.log('saving to local storage, key: ' + kvp[0], kvp[1]);
         localStorage.setItem(kvp[0], kvp[1]);
     });
 }
 
-function loadUserData(defaults) {
+function loadUserData(defaults, arraysAsObjects) {
     const storageKeys = getStorageKeys(defaults);
     const savedValues = storageKeys.map(sk => {
         var lsValue = localStorage.getItem(sk);
@@ -41,8 +43,8 @@ function loadUserData(defaults) {
     return merge(defaults, data);
 }
 
-function loadStrategyInputData() {
+function loadStrategyInputData(transformArrays) {
     return fetch('./defaultData.json')
             .then(resp => resp.json())
-            .then(loadUserData)
+            .then(loadUserData);
 }

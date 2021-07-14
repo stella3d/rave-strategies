@@ -56,6 +56,14 @@ function arrayToObject(array) {
     return obj;
 }
 
+function objArrayToArray(obj) {
+    var arr = new Array(obj.length);
+    for (let i = 0; i < arr.length; i++) {
+        arr[i] = obj[i];
+    }
+    return arr;
+}
+
 function arrayMembersToObjects(obj) {
     Object.keys(obj).forEach(key => {
         var val = obj[key];
@@ -72,7 +80,7 @@ function arrayMembersToObjects(obj) {
     return obj;
 }
 
-loadStrategyInputData()
+loadStrategyInputData(true)
 .then((data) => {
     let buttonObj = {};
     let guiData = arrayMembersToObjects(data);
@@ -100,7 +108,22 @@ loadStrategyInputData()
     addArrayGuiFolder(gui, guiData.pitches, 'pitch lists');
 
     buttonObj['SAVE'] = function() {
-        saveUserData(guiData);
+        let saveData = {};    
+        Object.keys(guiData).forEach(k => {
+            let val = guiData[k];
+            if(val['isArrayRepresentation']) {
+                for (let i = 0; i < val.length; i++) {
+                    const element = val[i];
+                    if(element['isArrayRepresentation'])
+                        val[i] = objArrayToArray(element);    
+                }
+                val = objArrayToArray(val);
+            }
+
+            saveData[k] = val;    
+        });
+
+        saveUserData(saveData);
     };
     gui.add(buttonObj, 'SAVE')
 });
